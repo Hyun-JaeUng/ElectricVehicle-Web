@@ -43,7 +43,9 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+#FindTitle,
+.location {
 	margin: 0;
 	color: #111111;
 	font-weight: 400;
@@ -74,6 +76,15 @@ h5 {
 
 h6 {
 	font-size: 16px;
+}
+
+.text5 {
+	margin: 0;
+	color: #111111;
+	font-weight: 400;
+	color : white;
+	text-align: center;
+	font-family: 'Do Hyeon', sans-serif;
 }
 
 p {
@@ -1226,7 +1237,7 @@ select {
 }
 
 .car__item__text__inner ul li:after {
-	position: absolute;
+	/*position: absolute;*/
 	right: -23px;
 	top: 3px;
 	height: 15px;

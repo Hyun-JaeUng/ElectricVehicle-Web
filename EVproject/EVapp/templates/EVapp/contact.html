@@ -2,6 +2,8 @@
 <html lang="zxx">
 {% load static %}
 <head>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
     <meta charset="UTF-8">
     <meta name="description" content="HVAC Template">
     <meta name="keywords" content="HVAC, unica, creative, html">
@@ -168,6 +170,8 @@
     </div>
     <!-- Breadcrumb Begin -->
 
+
+<!-- 수정 시작 부분 -->
     <!-- Contact Section Begin -->
     <section class="contact spad">
         <div class="container">
@@ -175,39 +179,45 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="contact__text">
                         <div class="section-title">
-                            <h2>Let’s Work Together</h2>
-                            <p>To make requests for further information, contact us via our social channels.</p>
+                            <h2>Provided Services</h2>
                         </div>
                         <ul>
-                            <li><span>Weekday</span> 08:00 am to 18:00 pm</li>
-                            <li><span>Saturday:</span> 10:00 am to 16:00 pm</li>
-                            <li><span>Sunday:</span> Closed</li>
+                            <li class="provide_user" style="text-align : center">Add Bookmark</li>
+                            <li class="provide_user" style="text-align : center">Use of bulletin Board</li>
+                            <li class="provide_user" style="text-align : center">Save your own Information</li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6">
-                    <div class="contact__form">
-                        <form action="#">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <input type="text" placeholder="Name">
-                                </div>
-                                <div class="col-lg-6">
-                                    <input type="text" placeholder="Email">
-                                </div>
-                            </div>
-                            <input type="text" placeholder="Subject">
-                            <textarea placeholder="Your Question"></textarea>
-                            <button type="submit" class="site-btn">Submit Now</button>
-                        </form>
-                    </div>
-                </div>
+
+
+				<div class="card">
+				<article class="card-body">
+				<a href="http://localhost:8000/EVapp/car_details/" class="float-right btn btn-outline-primary">Sign up</a>
+				<h4 class="card-title mb-4 mt-1"></h4>
+				<form method="POST">
+				{% csrf_token %}
+					<div class="form-group">
+						<label>Your email</label>
+						<input id="email" name="email" class="form-control" placeholder="Email" type="email">
+					</div> <!-- form-group// -->
+					<div class="form-group">
+						<label>Your password</label>
+						<input id="pwd" name="pwd" class="form-control" placeholder="******" type="password">
+					</div> <!-- form-group// -->
+					<div class="form-group">
+						<button id="signin" type="submit" class="btn btn-primary btn-block"> Login  </button>
+					</div> <!-- form-group// -->
+				</form>
+				</article>
+				</div> <!-- card.// -->
             </div>
         </div>
     </section>
     <!-- Contact Section End -->
+<!-- 여기까지 -->
 
-    <!-- Contact Address Begin -->
+
+<!--
     <div class="contact-address">
         <div class="container">
             <div class="contact__address__text">
@@ -237,7 +247,7 @@
             </div>
         </div>
     </div>
-    <!-- Contact Address End -->
+-->
 
     <!-- Footer Section Begin -->
     <footer class="footer set-bg" data-setbg="{% static 'img/footer-bg.jpg' %}">
