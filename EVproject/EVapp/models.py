@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 class ElectricCarList(models.Model) :
-    number = models.IntegerField(primary_key=True)
+    number = models.IntegerField(primary_key=True, unique=True)
     name = models.CharField(max_length=30, null=True)
     subname = models.CharField(max_length=30, null=True)
     chargetype = models.CharField(max_length=30, null=True)
