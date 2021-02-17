@@ -25,6 +25,8 @@
 </head>
 
 <body>
+
+
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
@@ -159,8 +161,9 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title about-title">
-                        <h2>2021년 전기차 보조금 계산기</h2>
-                        <p>올해 변경된 보조금 정책을 반영하여 이용자의 지역, 구매 희망 차종을 통하여 보조금을 계산할 수 있다.</p>
+                        <h2>전기승용차 보조금 계산기</h2>
+                        <p>• 2021년 변경된 전기차 보조금은 가격 구간별로 보조금을 차등으로 지원한다.</p>
+                        <p>• 해당 보조금 계산기는 복잡한 보조금 산출방식을 자동으로 계산해주는 기능을 제공한다.</p>
                     </div>
                 </div>
             </div>
@@ -175,48 +178,20 @@
                 <div class="col-lg-12 col-md-6">
                     <form action="#" class="call__form">
                         <div class="row">
-                            <div class="col-lg-3">
-                                <select>
-                                    <option value="">Tesla</option>
-                                    <option value="">현대</option>
-                                    <option value="">기아</option>
-                                    <option value="">BMW</option>
-                                    <option value="">GM</option>
-                                    <option value="">르노 삼성/option>
+                            <div class="col-lg-3 col-md-3">
+                                <select name="sel1" id="sel1">
                                 </select>
                             </div>
-                            <div class="col-lg-3">
-                                <select>
-                                    <option value="">Choose Our Services</option>
-                                    <option value="">Buyㅇㅇ Cars</option>
-                                    <option value="">Sell Cars</option>
-                                    <option value="">Wash Cars</option>
+                            <div class="col-lg-3 col-md-3">
+                                <select name="sel2" id="sel2" style="">
                                 </select>
                             </div>
-                            <div class="col-lg-3">
-                                <select>
-                                    <option value="">아</option>
-                                    <option value="">우 Cars</option>
-                                    <option value="">S아ll Cars</option>
-                                    <option value="">Wash Cars</option>
+                            <div class="col-lg-3 col-md-3">
+                                <select name="sel3" id="sel3" style="">
                                 </select>
                             </div>
-                            <div class="col-lg-3">
-                                <select>
-                                    <option value="">Choose Our Services</option>
-                                    <option value="">Buy Cars</option>
-                                    <option value="">Sell Cars</option>
-                                    <option value="">Wash Cars</option>
-                                </select>
-                            </div>
-                            <div class="col-lg-3">
-                            </div>
-                            <div class="col-lg-3">
-                            </div>
-                            <div class="col-lg-3">
-                            </div>
-                            <div class="col-lg-3">
-                                <button type="submit" class="site-btn">Submit Now</button>
+                            <div class="col-lg-3 col-md-3">
+                                <button type="submit" class="site-btn">계산 실행</button>
                             </div>
                         </div>
                     </form>
@@ -234,11 +209,11 @@
                     <div class="col-lg-4 col-md-6 col-sm-6">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title mb-4">국비 보조금</h5>
-                                <h1 class="mt-1 mb-3">14.212</h1>
+                                <h5 class="card-title mb-4">국고 보조금<img class="moneyim" src="{% static 'img/about/money.png' %}" alt="" /></h5>
+                                <h1 class="mt-1 mb-3">800 만원</h1>
                                 <div class="mb-1">
-                                    <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 5.25% </span>
-                                    <span class="text-muted">Since last week</span>
+                                    <span class="text-muted">가격계수</span>
+                                    <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 100% </span>
                                 </div>
                             </div>
                         </div>
@@ -246,11 +221,10 @@
                     <div class="col-lg-4 col-md-6 col-sm-6">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title mb-4">지자체 보조금</h5>
-                                <h1 class="mt-1 mb-3">14.212</h1>
+                                <h5 class="card-title mb-4">지자체 보조금<img class="moneyim" src="{% static 'img/about/money.png' %}" alt="" /></h5>
+                                <h1 class="mt-1 mb-3">1300 만원</h1>
                                 <div class="mb-1">
-                                    <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 5.25% </span>
-                                    <span class="text-muted">Since last week</span>
+                                    <span class="text-muted">보급대수 현황에 따라 변동됨</span>
                                 </div>
                             </div>
                         </div>
@@ -258,11 +232,11 @@
                     <div class="col-lg-4 col-md-6 col-sm-6">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title mb-4">최종 보조금</h5>
+                                <h5 class="card-title mb-4"  style="color:#17a2b8;font-weight:700;font-size:15px;">최종 보조금<img class="moneyim" src="{% static 'img/about/money.png' %}" alt="" /></h5>
                                 <h1 class="mt-1 mb-3">14.212</h1>
                                 <div class="mb-1">
-                                    <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 5.25% </span>
-                                    <span class="text-muted">Since last week</span>
+                                    <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i></span>
+                                    <span class="text-muted">국고 보조금 + 지자체 보조금</span>
                                 </div>
                             </div>
                         </div>
@@ -367,13 +341,498 @@
     <!-- Js Plugins -->
     <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
+<!--    <script src="{% static 'js/jquery.nice-select.min.js' %}"></script>-->
     <script src="{% static 'js/jquery-ui.min.js' %}"></script>
     <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
     <script src="{% static 'js/mixitup.min.js' %}"></script>
     <script src="{% static 'js/jquery.slicknav.js' %}"></script>
     <script src="{% static 'js/owl.carousel.min.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script>
+$( document ).ready(function(){
+
+   //테스트용 데이터
+   var sel1 = {
+       " ":"지역",
+       "Seoul":"서울",
+        "Busan":"부산",
+        "Daegu":"대구",
+        "Incheon":"인천",
+        "Gwangju":"광주",
+        "Daejeon":"대전",
+        "Ulsan":"울산",
+        "Sejong":"세종",
+        "Gyeonggi":"경기",
+        "Kangwon":"강원",
+        "Chungbuk":"충북",
+        "Chungnam":"충남",
+        "Jeonbuk":"전북",
+        "Jeonnam":"전남",
+        "Gyeongbuk":"경북",
+        "Gyeongnam":"경남",
+        "Jeju":"제주"
+
+    };
+
+    //sel1이 여성일경우
+    var sel2_1 = {
+       " ":"브랜드 선택",
+       "HYUNDAI": "현대",
+       "KIA": "기아",
+        "SAMSUNG": "르노삼성",
+        "BMW": "BMW",
+        "GM": "GM",
+        "HANBUL": "한불모터스",
+        "TESLA": "테슬라",
+        "JAGUAR": "재규어",
+        "BENZ": "벤츠",
+        "AUDI": "아우디",
+        "SEMISISCO": "세미시스코"
+    };
+
+    //sel1이 남성일경우
+    var sel2_2 = {
+       " ":"브랜드 선택",
+       "HYUNDAI": "현대",
+       "KIA": "기아",
+        "SAMSUNG": "르노삼성",
+        "BMW": "BMW",
+        "GM": "GM",
+        "HANBUL": "한불모터스",
+        "TESLA": "테슬라",
+        "JAGUAR": "재규어",
+        "BENZ": "벤츠",
+        "AUDI": "아우디",
+        "SEMISISCO": "세미시스코"
+    };
+
+    var sel2_3 = {
+       " ":"브랜드 선택",
+       "HYUNDAI": "현대",
+       "KIA": "기아",
+        "SAMSUNG": "르노삼성",
+        "BMW": "BMW",
+        "GM": "GM",
+        "HANBUL": "한불모터스",
+        "TESLA": "테슬라",
+        "JAGUAR": "재규어",
+        "BENZ": "벤츠",
+        "AUDI": "아우디",
+        "SEMISISCO": "세미시스코"
+    };
+
+    var sel2_4 = {
+       " ":"브랜드 선택",
+       "HYUNDAI": "현대",
+       "KIA": "기아",
+        "SAMSUNG": "르노삼성",
+        "BMW": "BMW",
+        "GM": "GM",
+        "HANBUL": "한불모터스",
+        "TESLA": "테슬라",
+        "JAGUAR": "재규어",
+        "BENZ": "벤츠",
+        "AUDI": "아우디",
+        "SEMISISCO": "세미시스코"
+    };
+
+    var sel2_5 = {
+       " ":"브랜드 선택",
+       "HYUNDAI": "현대",
+       "KIA": "기아",
+        "SAMSUNG": "르노삼성",
+        "BMW": "BMW",
+        "GM": "GM",
+        "HANBUL": "한불모터스",
+        "TESLA": "테슬라",
+        "JAGUAR": "재규어",
+        "BENZ": "벤츠",
+        "AUDI": "아우디",
+        "SEMISISCO": "세미시스코"
+    };
+
+    var sel2_6 = {
+       " ":"브랜드 선택",
+       "HYUNDAI": "현대",
+       "KIA": "기아",
+        "SAMSUNG": "르노삼성",
+        "BMW": "BMW",
+        "GM": "GM",
+        "HANBUL": "한불모터스",
+        "TESLA": "테슬라",
+        "JAGUAR": "재규어",
+        "BENZ": "벤츠",
+        "AUDI": "아우디",
+        "SEMISISCO": "세미시스코"
+    };
+
+    var sel2_7 = {
+       " ":"브랜드 선택",
+       "HYUNDAI": "현대",
+       "KIA": "기아",
+        "SAMSUNG": "르노삼성",
+        "BMW": "BMW",
+        "GM": "GM",
+        "HANBUL": "한불모터스",
+        "TESLA": "테슬라",
+        "JAGUAR": "재규어",
+        "BENZ": "벤츠",
+        "AUDI": "아우디",
+        "SEMISISCO": "세미시스코"
+    };
+
+    var sel2_8 = {
+       " ":"브랜드 선택",
+       "HYUNDAI": "현대",
+       "KIA": "기아",
+        "SAMSUNG": "르노삼성",
+        "BMW": "BMW",
+        "GM": "GM",
+        "HANBUL": "한불모터스",
+        "TESLA": "테슬라",
+        "JAGUAR": "재규어",
+        "BENZ": "벤츠",
+        "AUDI": "아우디",
+        "SEMISISCO": "세미시스코"
+    };
+
+    var sel2_9 = {
+       " ":"브랜드 선택",
+       "HYUNDAI": "현대",
+       "KIA": "기아",
+        "SAMSUNG": "르노삼성",
+        "BMW": "BMW",
+        "GM": "GM",
+        "HANBUL": "한불모터스",
+        "TESLA": "테슬라",
+        "JAGUAR": "재규어",
+        "BENZ": "벤츠",
+        "AUDI": "아우디",
+        "SEMISISCO": "세미시스코"
+    };
+
+    var sel2_10 = {
+       " ":"브랜드 선택",
+       "HYUNDAI": "현대",
+       "KIA": "기아",
+        "SAMSUNG": "르노삼성",
+        "BMW": "BMW",
+        "GM": "GM",
+        "HANBUL": "한불모터스",
+        "TESLA": "테슬라",
+        "JAGUAR": "재규어",
+        "BENZ": "벤츠",
+        "AUDI": "아우디",
+        "SEMISISCO": "세미시스코"
+    };
+
+    var sel2_11 = {
+       " ":"브랜드 선택",
+       "HYUNDAI": "현대",
+       "KIA": "기아",
+        "SAMSUNG": "르노삼성",
+        "BMW": "BMW",
+        "GM": "GM",
+        "HANBUL": "한불모터스",
+        "TESLA": "테슬라",
+        "JAGUAR": "재규어",
+        "BENZ": "벤츠",
+        "AUDI": "아우디",
+        "SEMISISCO": "세미시스코"
+    };
+
+    var sel2_12 = {
+       " ":"브랜드 선택",
+       "HYUNDAI": "현대",
+       "KIA": "기아",
+        "SAMSUNG": "르노삼성",
+        "BMW": "BMW",
+        "GM": "GM",
+        "HANBUL": "한불모터스",
+        "TESLA": "테슬라",
+        "JAGUAR": "재규어",
+        "BENZ": "벤츠",
+        "AUDI": "아우디",
+        "SEMISISCO": "세미시스코"
+    };
+
+    var sel2_13 = {
+       " ":"브랜드 선택",
+       "HYUNDAI": "현대",
+       "KIA": "기아",
+        "SAMSUNG": "르노삼성",
+        "BMW": "BMW",
+        "GM": "GM",
+        "HANBUL": "한불모터스",
+        "TESLA": "테슬라",
+        "JAGUAR": "재규어",
+        "BENZ": "벤츠",
+        "AUDI": "아우디",
+        "SEMISISCO": "세미시스코"
+    };
+
+    var sel2_14 = {
+       " ":"브랜드 선택",
+       "HYUNDAI": "현대",
+       "KIA": "기아",
+        "SAMSUNG": "르노삼성",
+        "BMW": "BMW",
+        "GM": "GM",
+        "HANBUL": "한불모터스",
+        "TESLA": "테슬라",
+        "JAGUAR": "재규어",
+        "BENZ": "벤츠",
+        "AUDI": "아우디",
+        "SEMISISCO": "세미시스코"
+    };
+
+    var sel2_15 = {
+       " ":"브랜드 선택",
+       "HYUNDAI": "현대",
+       "KIA": "기아",
+        "SAMSUNG": "르노삼성",
+        "BMW": "BMW",
+        "GM": "GM",
+        "HANBUL": "한불모터스",
+        "TESLA": "테슬라",
+        "JAGUAR": "재규어",
+        "BENZ": "벤츠",
+        "AUDI": "아우디",
+        "SEMISISCO": "세미시스코"
+    };
+
+    var sel2_16 = {
+       " ":"브랜드 선택",
+       "HYUNDAI": "현대",
+       "KIA": "기아",
+        "SAMSUNG": "르노삼성",
+        "BMW": "BMW",
+        "GM": "GM",
+        "HANBUL": "한불모터스",
+        "TESLA": "테슬라",
+        "JAGUAR": "재규어",
+        "BENZ": "벤츠",
+        "AUDI": "아우디",
+        "SEMISISCO": "세미시스코"
+    };
+
+    var sel2_17 = {
+       " ":"브랜드 선택",
+       "HYUNDAI": "현대",
+       "KIA": "기아",
+        "SAMSUNG": "르노삼성",
+        "BMW": "BMW",
+        "GM": "GM",
+        "HANBUL": "한불모터스",
+        "TESLA": "테슬라",
+        "JAGUAR": "재규어",
+        "BENZ": "벤츠",
+        "AUDI": "아우디",
+        "SEMISISCO": "세미시스코"
+    };
+
+    var sel3_1 = {
+       " ":"차종",
+       "C": "코나(기본형)",
+        "D": "코나(경제형)",
+        "E": "아이오닉(HP)",
+        "F": "아이오닉(PTC)"
+    };
+    var sel3_2 = {
+       " ":"차종",
+       "C": "니로(HP)",
+        "D": "니로(PTC)",
+        "E": "니로 EV",
+        "F": "쏘울(기본형)",
+        "G": "쏘울(도심형)"
+    };
+
+    var sel3_3 = {
+       " ":"차종",
+       "C": "ZOE ZEN",
+        "D": "ZOE INTENS ECO",
+        "E": "ZOE INTENS"
+    };
+
+    var sel3_4 = {
+       " ":"차종",
+       "C": "i3 120Ah Lux",
+        "D": "i3 120Ah SoL+"
+    };
+
+    var sel3_5 = {
+       " ":"차종",
+       "C": "볼트 EV LT",
+        "D": "볼트 EV Primier"
+    };
+
+    var sel3_6 = {
+       " ":"차종",
+       "C": "Peugeot e-208",
+        "D": "DS3 E-tense",
+        "E": "Peugeot e-2008"
+    };
+
+    var sel3_7 = {
+       " ":"차종",
+       "C": "Model S",
+        "D": "Model 3 (SRP RWD)",
+        "E": "Model 3 (Long Range)",
+        "F": "Model 3 (Performance)"
+    };
+
+    var sel3_8 = {
+       " ":"차종",
+       "C": "I-PACE EV400"
+    };
+
+    var sel3_9 = {
+       " ":"차종",
+       "C": "EQC 400 4M",
+        "D": "EQC 400 4MATIC"
+    };
+
+    var sel3_10 = {
+       " ":"차종",
+       "C": "e-tron 55 quattro"
+    };
+
+    var sel3_11 = {
+       " ":"차종",
+       "C": "SMART EV Z"
+    };
+
+
+
+   //sel1에 서버에서 받아온 값을 넣기위해..
+   // map배열과 select 태그 id를 넘겨주면 option 태그를 붙여줌.
+   // map[키이름] = 그 키에 해당하는 value를 반환한다.
+   //retOption(데이터맵, select함수 id)
+   function retOption(mapArr, select){
+       var html = '';
+       var keys = Object.keys(mapArr);
+       for (var i in keys) {
+           html += "<option value=" + "'" + keys[i] + "'>" + mapArr[keys[i]] + "</option>";
+       }
+
+        $("select[id='" + select +"']").html(html);
+   }
+
+   $("select[id='sel1']").on("change", function(){
+       var option = $("#sel1 option:selected").val();
+        var subSelName = '';
+       if(option == "Seoul") {
+           subSelName = "sel2_1";
+
+        } else if(option == "Busan"){
+           subSelName = "sel2_2";
+
+        } else if(option == "Daegu"){
+           subSelName = "sel2_3";
+
+        } else if(option == "Incheon"){
+           subSelName = "sel2_4";
+
+        } else if(option == "Gwangju"){
+           subSelName = "sel2_5";
+
+        } else if(option == "Daejeon"){
+           subSelName = "sel2_6";
+
+        } else if(option == "Ulsan"){
+           subSelName = "sel2_7";
+
+        } else if(option == "Sejong"){
+           subSelName = "sel2_8";
+
+        } else if(option == "Gyeonggi"){
+           subSelName = "sel2_9";
+
+        } else if(option == "Kangwon"){
+           subSelName = "sel2_10";
+
+        } else if(option == "Chungbuk"){
+           subSelName = "sel2_11";
+
+        } else if(option == "Chungnam"){
+           subSelName = "sel2_12";
+
+        } else if(option == "Jeonbuk"){
+           subSelName = "sel2_13";
+
+        } else if(option == "Jeonnam"){
+           subSelName = "sel2_14";
+
+        } else if(option == "Gyeongbuk"){
+           subSelName = "sel2_15";
+
+        } else if(option == "Gyeongnam"){
+           subSelName = "sel2_16";
+
+        } else if(option == "Jeju"){
+           subSelName = "sel2_17";
+
+        } else{
+           $("#sel2").hide();
+           return;
+        }
+        $("#sel2").show();
+        retOption(eval(subSelName), "sel2");
+    })
+
+   $("select[id='sel2']").on("change", function(){
+       var option = $("#sel2 option:selected").val();
+        var subSelName = '';
+       if(option == "HYUNDAI") {
+           subSelName = "sel3_1";
+
+        } else if(option == "KIA"){
+           subSelName = "sel3_2";
+
+        } else if(option == "SAMSUNG"){
+           subSelName = "sel3_3";
+
+        } else if(option == "BMW"){
+           subSelName = "sel3_4";
+
+        } else if(option == "GM"){
+           subSelName = "sel3_5";
+
+        } else if(option == "HANBUL"){
+           subSelName = "sel3_6";
+
+        } else if(option == "TESLA"){
+           subSelName = "sel3_7";
+
+        } else if(option == "JAGUAR"){
+           subSelName = "sel3_8";
+
+        } else if(option == "BENZ"){
+           subSelName = "sel3_9";
+
+        } else if(option == "AUDI"){
+           subSelName = "sel3_10";
+
+        } else if(option == "SEMISISCO"){
+           subSelName = "sel3_11";
+
+        } else{
+           $("#sel3").hide();
+           return;
+        }
+        $("#sel3").show();
+        retOption(eval(subSelName), "sel3");
+    })
+
+
+
+   retOption(sel1, "sel1");
+   retOption(sel2, "sel2");
+   retOption(sel3, "sel3");
+});
+</script>
+
 </body>
 
 </html>

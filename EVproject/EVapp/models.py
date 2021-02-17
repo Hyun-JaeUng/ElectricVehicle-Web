@@ -39,3 +39,18 @@ class User(models.Model):
     pwd = models.CharField(max_length=100)
     name = models.CharField(max_length=10)
     Car_Model = models.CharField(max_length=30)
+
+# 재웅 ajax ctrl + / 단축키.
+# class Brand(models.Model) :
+#     brand_id = models.IntegerField(primary_key=True)
+#     brand_name = models.CharField(max_length=10, null=False)
+#
+# class Carmodel(models.Model) :
+#     Carmodel_id = models.IntegerField(primary_key=True)
+#     brand_id = models.ForeignKey('Brand', on_delete=models.CASCADE, db_column='brand_id')
+#     Carmodel_name = models.CharField(max_length=10, null=False)
+#
+# class Carfunc(models.Model) :
+#     Carfunc_id = models.IntegerField(primary_key=True)
+#     Carmodel_id = models.ForeignKey('Carmodel', on_delete=models.CASCADE, db_column='Carmodel_id')
+#     Carfunc_name = models.CharField(max_length=20, null=False) """
