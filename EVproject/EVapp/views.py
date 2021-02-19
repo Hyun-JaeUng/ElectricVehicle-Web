@@ -1,35 +1,56 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse
-from django.template import loader
+#### ADD 수연 #####
+import os
+import json
+####################
+
+
+####### ADD 재웅 ######
+import types
+
 from .models import ElectricCarList
-from .models import Question
+
+#####################
+
+############# ADD 서영 ###############
+
+from .models import Question, Answer, Comment
 from django.utils import timezone
-from .forms import NewQuestionForm
+from .forms import NewQuestionForm, AnswerForm, CommentForm
 from django.core.paginator import Paginator
-from tkinter import messagebox
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect, get_object_or_404, resolve_url
+from django.contrib.auth import authenticate, login
+from EVapp.forms import UserForm
+from django.contrib import messages
+from django.db.models import Q, Count
+#########################################
+
 from django.http import HttpResponse
 from django.template import loader
 from django.http import HttpResponseRedirect
-from EVapp.models import User
-import os
-import json
+
+
 
 def index(request):
     template = loader.get_template('EVapp/index.html')
     return HttpResponse(template.render(None, request))
 
+
 def about(request):
     template = loader.get_template('EVapp/about.html')
     return HttpResponse(template.render(None, request))
+
 
 def blog(request):
     template = loader.get_template('EVapp/blog.html')
     return HttpResponse(template.render(None, request))
 
+
 def blog_details(request):
     template = loader.get_template('EVapp/blog_details.html')
     return HttpResponse(template.render(None, request))
 
+################## ADD 재웅 ##############################
 def car(request):
     template = loader.get_template('EVapp/car.html')
     car_1 = ElectricCarList.objects.get(number=1)
@@ -43,63 +64,51 @@ def car(request):
     car_9 = ElectricCarList.objects.get(number=9)
     context = {"car_1": car_1, "car_2": car_2, "car_3": car_3, "car_4": car_4, "car_5": car_5, "car_6": car_6, "car_7": car_7, "car_8": car_8, "car_9": car_9}
     return HttpResponse(template.render(context, request))
-
-# Add 영민
-
+###################################################################
+"""
 def car_details(request):
     if request.method == 'POST':
         email = request.POST.get('email')
         pwd = request.POST.get('pwd')
         name = request.POST.get('name')
         Car_Model = request.POST.get('Car_Model')
+        # 여기에 address 추가
         user = User(email=email, name=name, pwd=pwd, Car_Model=Car_Model)
-        user.save()
-        return HttpResponseRedirect('http://localhost:8000/EVapp/contact/')  # 회원가입시 넘어가져야 할 페이지 로그인페이지
+        if user.email and user.name and user.pwd and user.Car_Model != '':
+            if user.email == User.objects.get(email=user.email).email:
+                pyautogui.alert('중복되는 ID입니다.')
+                return render(request, 'EVapp/car_details.html', None)
+            else:
+                user.save()
+                return HttpResponseRedirect('http://localhost:8000/EVapp/contact/')  # 회원가입시 넘어가져야 할 페이지 로그인페이지
+
+        else:
+            pyautogui.alert('정보를 모두 기입해 주세요.')
     return render(request, 'EVapp/car_details.html', None)  # 회원가입 페이지
-
-
+"""
+"""
 def contact(request):
     if request.method == 'POST':
         email = request.POST.get('email')
         pwd = request.POST.get('pwd')
         try:
             exist_user = User.objects.get(email=email, pwd=pwd)
-
-            return HttpResponseRedirect('http://localhost:8000/EVapp/car/')
+            print(exist_user.email)
+            print(exist_user.pwd)
+            return HttpResponseRedirect('http://localhost:8000/EVapp/')
         except:
-            #messagebox.showinfo('알림창','존재하지 않는 ID입니다.')
+            pyautogui.alert('존재하지 않는 ID 또는 비밀번호가 틀렸습니다.')
             return render(request, 'EVapp/contact.html/', None)
 
     return render(request, 'EVapp/contact.html')
+"""
 
-## 영민 끝
 
-##### 수연님 부분
+################## ADD 수연 ######################
+
 
 def map(request):
-    dir_path = os.path.dirname(os.path.realpath(__file__))
-    with open(dir_path + '/' + 'EVdata.json', encoding='utf-8') as json_file:
-        attractions = json.load(json_file)['records']
-        attractiondict = []
-        for attraction in attractions:
-            content = {
-                "title": attraction['충전소명'],
-                "mapx": attraction['경도'],
-                "mapy": attraction['위도'],
-                "addr": str(attraction['충전소위치상세']),
-                "fee": attraction['주차료부과여부'],
-                "starttime": str(attraction['이용가능시작시각']),
-                "endtime": str(attraction['이용가능종료시각']),
-                "slowYN": attraction['완속충전가능여부'],
-                "fastYN": attraction['급속충전가능여부'],
-            }
-            if attraction.get('급속충전타입구분'):
-                content['fasttype'] = str(attraction['급속충전타입구분'])
-            else:
-                content['fasttype'] = ''
-            attractiondict.append(content)
-        attractionJson = json.dumps(attractiondict, ensure_ascii=False)
-    return render(request, 'EVapp/map.html', {'attractionJson': attractionJson})
+ return render(request, 'EVapp/map.html', None)
 
 
 def loadMapData(request, id):
@@ -167,30 +176,60 @@ def loadMapData(request, id):
 
         attractionJson = json.dumps(attractiondict, ensure_ascii=False)
     return HttpResponse(attractionJson, content_type="application/json")
-#################### 수연님 끝
 
-#### 서영님 부분
+
+def mapSearch(request):
+ mapword = request.GET.get('mapword')
+ mapselect = request.GET.get('mapselect')
+ if mapword == '':
+    mapword = mapselect
+ context = {
+     'mapword': mapword,
+     'mapselect': mapselect,
+ }
+ return render(request, 'EVapp/mapSearch.html', context)
+
+def purchase(request):
+  return render(request, 'EVapp/purchase.html', None)
+
+##############################################################
+
+
+#################### ADD 서영 ################################
+
 def question_list(request):
-    page = request.GET.get('page', '1')
-    question_list = Question.objects.order_by('-create_at')
-    paginator = Paginator(question_list, 10)
-    page_obj = paginator.get_page(page)
-    # template = loader.get_template('EVapp/question_list.html')
-    # return HttpResponse(template.render(None, request))
-    return render(request, 'EVapp/question_list.html', {'question_list':page_obj})
+ page = request.GET.get('page', '1')
+ kw = request.GET.get('kw', '')
+ so = request.GET.get('so', 'recent')
+ if so == 'recommend':
+     question_list = Question.objects.annotate(num_voter=Count('voter')).order_by('-num_voter', '-create_at')
+ elif so == 'popular':
+     question_list = Question.objects.annotate(num_answer=Count('answer')).order_by('-num_answer', '-create_at')
+ else:  # recent
+     question_list = Question.objects.order_by('-create_at')
+ if kw:
+     question_list = question_list.filter(
+         Q(subject__icontains=kw) |  # 제목검색
+         Q(content__icontains=kw) |  # 내용검색
+         Q(author__username__icontains=kw) |  # 질문 글쓴이검색
+         Q(answer__author__username__icontains=kw)  # 답변 글쓴이검색
+     ).distinct()
+ paginator = Paginator(question_list, 10)
+ page_obj = paginator.get_page(page)
+ context = {'question_list': page_obj, 'page': page, 'kw': kw, 'so' : so}
+ return render(request, 'EVapp/question_list.html', context)
 
 def question_detail(request, question_id):
-    # question = get_object_or_404(Question,id=question_id)
-    question = Question.objects.get(id=question_id)
-    return render(request, 'EVapp/question_detail.html', {'question':question})
+ question = Question.objects.get(id=question_id)
+ return render(request, 'EVapp/question_detail.html', {'question':question})
 
-# @login_required(login_url='common:login')
+@login_required(login_url='login')
 def question_create(request):
  if request.method == 'POST':
   form = NewQuestionForm(request.POST)
   if form.is_valid():
    question = form.save(commit=False)
-   # question.author = request.user
+   question.author = request.user
    question.create_at = timezone.now()
    question.save()
    return redirect('question_list')
@@ -198,21 +237,165 @@ def question_create(request):
   form = NewQuestionForm()
   return render(request, 'EVapp/question_create.html', {'form': form})
 
-# @login_required(login_url='common:login')
+@login_required(login_url='login')
 def answer_create(request, question_id):
+ question = get_object_or_404(Question, pk=question_id)
+ if request.method == 'POST':
+  form = AnswerForm(request.POST)
+  if form.is_valid():
+   answer = form.save(commit=False)
+   answer.author = request.user
+   answer.question = question
+   answer.create_at = timezone.now()
+   answer.save()
+   return redirect('{}#answer_{}'.format(
+       resolve_url('question_detail', question_id=question.id), answer.id))
+ else:
+  form = AnswerForm()
+ context = {'question': question, 'form': form}
+ return render(request, 'EVapp/question_detail.html', context)
+
+
+def signup(request):
+ if request.method == "POST":
+  form = UserForm(request.POST)
+  if form.is_valid():
+   form.save()
+   username = form.cleaned_data.get('username')
+   raw_password = form.cleaned_data.get('password1')
+   user = authenticate(username=username, password=raw_password)
+   login(request, user)
+   return redirect('index')
+ else:
+  form = UserForm()
+ return render(request, 'EVapp/signup.html', {'form': form})
+
+@login_required(login_url='login')
+def question_modify(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
-    question.answer_set.create(content=request.POST.get('content'), create_at=timezone.now())
-    return redirect('question_detail', question_id=question_id)
-    # if request.method == 'POST':
-    #  form = AnswerForm(request.POST)
-    #  if form.is_valid():
-    #   answer = form.save(commit=False)
-    #   answer.author = request.user
-    #   answer.question = question
-    #   answer.create_at = timezone.now()
-    #   answer.save()
-    #   return redirect('question_detail', question_id=question_id)
-    # else:
-    #  form = AnswerForm()
-    # context = {'question': question, 'form': form}
-    # return render(request, 'EVapp/question_detail.html', context)
+    if request.user != question.author:
+        messages.error(request, '수정권한이 없습니다')
+        return redirect('question_detail', question_id=question.id)
+
+    if request.method == "POST":
+        form = NewQuestionForm(request.POST, instance=question)
+        if form.is_valid():
+            question = form.save(commit=False)
+            question.author = request.user
+            question.modify_date = timezone.now()  # 수정일시 저장
+            question.save()
+            return redirect('question_detail', question_id=question.id)
+    else:
+        form = NewQuestionForm(instance=question)
+    context = {'form': form}
+    return render(request, 'EVapp/question_create.html', context)
+
+@login_required(login_url='login')
+def question_delete(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    if request.user != question.author:
+        messages.error(request, '삭제권한이 없습니다')
+        return redirect('question_detail', question_id=question.id)
+    question.delete()
+    return redirect('index')
+
+@login_required(login_url='login')
+def answer_modify(request, answer_id):
+    answer = get_object_or_404(Answer, pk=answer_id)
+    if request.user != answer.author:
+        messages.error(request, '수정권한이 없습니다')
+        return redirect('question_detail', question_id=answer.question.id)
+
+    if request.method == "POST":
+        form = AnswerForm(request.POST, instance=answer)
+        if form.is_valid():
+            answer = form.save(commit=False)
+            answer.author = request.user
+            answer.modify_date = timezone.now()
+            answer.save()
+            return redirect('{}#answer_{}'.format(
+                resolve_url('question_detail', question_id=answer.question.id), answer.id))
+    else:
+        form = AnswerForm(instance=answer)
+    context = {'answer': answer, 'form': form}
+    return render(request, 'EVapp/answer_modify.html', context)
+
+@login_required(login_url='login')
+def answer_delete(request, answer_id):
+    answer = get_object_or_404(Answer, pk=answer_id)
+    if request.user != answer.author:
+        messages.error(request, '삭제권한이 없습니다')
+        return redirect('question_detail', question_id=answer.question.id)
+    answer.delete()
+    return redirect('question_detail', question_id=answer.question.id)
+
+@login_required(login_url='login')
+def comment_create_question(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.author = request.user
+            comment.create_at = timezone.now()
+            comment.question = question
+            comment.save()
+            return redirect('{}#comment_{}'.format(
+                resolve_url('question_detail', question_id=comment.question.id), comment.id))
+    else:
+        form = CommentForm()
+    context = {'form': form}
+    return render(request, 'EVapp/comment_form.html', context)
+
+@login_required(login_url='login')
+def comment_modify_question(request, comment_id):
+    comment = get_object_or_404(Comment, pk=comment_id)
+    if request.user != comment.author:
+        messages.error(request, '댓글수정권한이 없습니다')
+        return redirect('question_detail', question_id=comment.question.id)
+
+    if request.method == "POST":
+        form = CommentForm(request.POST, instance=comment)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.author = request.user
+            comment.modify_date = timezone.now()
+            comment.save()
+            return redirect('{}#comment_{}'.format(
+                resolve_url('question_detail', question_id=comment.question.id), comment.id))
+    else:
+        form = CommentForm(instance=comment)
+    context = {'form': form}
+    return render(request, 'EVapp/comment_form.html', context)
+
+@login_required(login_url='login')
+def comment_delete_question(request, comment_id):
+    comment = get_object_or_404(Comment, pk=comment_id)
+    if request.user != comment.author:
+        messages.error(request, '댓글삭제권한이 없습니다')
+        return redirect('question_detail', question_id=comment.question.id)
+    else:
+        comment.delete()
+    return redirect('question_detail', question_id=comment.question.id)
+
+@login_required(login_url='login')
+def vote_question(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    if request.user == question.author:
+        messages.error(request, '본인이 작성한 글은 추천할수 없습니다')
+    else:
+        question.voter.add(request.user)
+    return redirect('question_detail', question_id=question.id)
+
+@login_required(login_url='login')
+def vote_answer(request, answer_id):
+    answer = get_object_or_404(Answer, pk=answer_id)
+    if request.user == answer.author:
+        messages.error(request, '본인이 작성한 글은 추천할수 없습니다')
+    else:
+        answer.voter.add(request.user)
+    return redirect('question_detail', question_id=answer.question.id)
+
+
+############################################################
+

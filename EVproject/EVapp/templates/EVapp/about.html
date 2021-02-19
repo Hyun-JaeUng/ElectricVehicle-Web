@@ -143,7 +143,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                        <h2>나의 보조금</h2>
+                        <h2>보조금 계산</h2>
                         <div class="breadcrumb__links">
                             <a href="{% url 'index' %}"><i class="fa fa-home"></i> Home</a>
                             <span>About Us</span>
@@ -160,10 +160,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="section-title about-title">
-                        <h2>전기승용차 보조금 계산기</h2>
-                        <p>• 2021년 변경된 전기차 보조금은 가격 구간별로 보조금을 차등으로 지원한다.</p>
-                        <p>• 해당 보조금 계산기는 복잡한 보조금 산출방식을 자동으로 계산해주는 기능을 제공한다.</p>
+                    <div class="section-title1 about-title">
+                        <p>• 해당 보조금 계산기는 2021년 변경된 보조금 산출방식을 자동으로 계산해주는 기능을 제공한다.</p>
+                        <br>
+                        <h5 id="cal_process">1. 지역 선택 -> 2. 브랜드 선택 -> 3. 차종 선택 -> 계산 실행</h5>
                     </div>
                 </div>
             </div>
@@ -172,25 +172,67 @@
     <!-- About Us Section End -->
 
     <!-- Call Section Begin -->
+    <div class="container">
+            <div class="about__feature">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title mb-4">국비 보조금<img class="moneyim" src="{% static 'img/about/money.png' %}" alt="" /></h5>
+                                <h1 class="mt-1 mb-3">{{country_money}} 만원</h1>
+                                <div class="mb-1">
+                                    <span class="text-muted">가격계수</span>
+                                    <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> {{price_coef}}% </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title mb-4">지자체 보조금<img class="moneyim" src="{% static 'img/about/money.png' %}" alt="" /></h5>
+                                <h1 class="mt-1 mb-3">{{area_state_money}} 만원</h1>
+                                <div class="mb-1">
+                                    <span class="text-muted">보급대수 현황에 따라 변동됨</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title mb-4"  style="color:#17a2b8;font-weight:700;font-size:17px;">최종 보조금<img class="moneyim" src="{% static 'img/about/money.png' %}" alt="" /></h5>
+                                <h1 class="mt-1 mb-3">{{total_money}} 만원</h1>
+                                <div class="mb-1">
+                                    <span class="text-muted">국고 보조금 + 지자체 보조금</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     <section class="call spad set-bg" data-setbg="{% static 'img/about/calculator.png' %}">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-6">
-                    <form action="#" class="call__form">
+                    <form method="POST" class="call__form">
+                        {% csrf_token %}
                         <div class="row">
-                            <div class="col-lg-3 col-md-3">
+                            <div class="col-lg-3">
                                 <select name="sel1" id="sel1">
                                 </select>
                             </div>
-                            <div class="col-lg-3 col-md-3">
-                                <select name="sel2" id="sel2" style="">
+                            <div class="col-lg-3">
+                                <select name="sel2" id="sel2" style="display:None">
                                 </select>
                             </div>
-                            <div class="col-lg-3 col-md-3">
-                                <select name="sel3" id="sel3" style="">
+                            <div class="col-lg-3">
+                                <select name="sel3" id="sel3" style="display:None">
                                 </select>
                             </div>
-                            <div class="col-lg-3 col-md-3">
+                            <div class="col-lg-3">
                                 <button type="submit" class="site-btn">계산 실행</button>
                             </div>
                         </div>
@@ -203,47 +245,7 @@
     <br>
     <br>
     <!-- <section class="about spad"> </section> -->
-        <div class="container">
-            <div class="about__feature">
-                <div class="row">
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title mb-4">국고 보조금<img class="moneyim" src="{% static 'img/about/money.png' %}" alt="" /></h5>
-                                <h1 class="mt-1 mb-3">800 만원</h1>
-                                <div class="mb-1">
-                                    <span class="text-muted">가격계수</span>
-                                    <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 100% </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title mb-4">지자체 보조금<img class="moneyim" src="{% static 'img/about/money.png' %}" alt="" /></h5>
-                                <h1 class="mt-1 mb-3">1300 만원</h1>
-                                <div class="mb-1">
-                                    <span class="text-muted">보급대수 현황에 따라 변동됨</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title mb-4"  style="color:#17a2b8;font-weight:700;font-size:15px;">최종 보조금<img class="moneyim" src="{% static 'img/about/money.png' %}" alt="" /></h5>
-                                <h1 class="mt-1 mb-3">14.212</h1>
-                                <div class="mb-1">
-                                    <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i></span>
-                                    <span class="text-muted">국고 보조금 + 지자체 보조금</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     <!-- Footer Section Begin -->
     <footer class="footer set-bg" data-setbg="{% static 'img/footer-bg.jpg' %}">
         <div class="container">
@@ -251,7 +253,8 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
                         <div class="footer__contact__title">
-                            <h2>Contact Us Now!</h2>
+                            <h2>Contact Us</h2>
+                            <br><h5> 2조 전기차 웹사이트</h5><br>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6">
@@ -260,62 +263,45 @@
                             <div class="option__item email"><i class="fa fa-envelope-o"></i> Colorlib@gmail.com</div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-4">
-                    <div class="footer__about">
-                        <div class="footer__logo">
-                            <a href="#"><img src="{% static 'img/footer-logo.png' %}" alt=""></a>
-                        </div>
-                        <p>Any questions? Let us know in store at 625 Gloria Union, California, United Stated or call us
-                            on (+1) 96 123 8888</p>
-                        <div class="footer__social">
-                            <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
-                            <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
-                            <a href="#" class="google"><i class="fa fa-google"></i></a>
-                            <a href="#" class="skype"><i class="fa fa-skype"></i></a>
+                    <div class="col-lg-2 offset-lg-1 col-md-3">
+                        <div class="footer__widget">
+                            <ul>
+                                <li><a href="{% url 'map' %}"><i class="fa fa-angle-right"></i>충전소 찾기</a></li>
+                            </ul>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-2 offset-lg-1 col-md-3">
-                    <div class="footer__widget">
-                        <h5>Infomation</h5>
-                        <ul>
-                            <li><a href="#"><i class="fa fa-angle-right"></i> Purchase</a></li>
-                            <li><a href="#"><i class="fa fa-angle-right"></i> Payemnt</a></li>
-                            <li><a href="#"><i class="fa fa-angle-right"></i> Shipping</a></li>
-                            <li><a href="#"><i class="fa fa-angle-right"></i> Return</a></li>
-                        </ul>
+                    <div class="col-lg-2 col-md-3">
+                        <div class="footer__widget">
+                            <ul>
+                                <li><a href="{% url 'car' %}"><i class="fa fa-angle-right"></i>전기차 정보</a></li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-2 col-md-3">
-                    <div class="footer__widget">
-                        <h5>Infomation</h5>
-                        <ul>
-                            <li><a href="#"><i class="fa fa-angle-right"></i> Hatchback</a></li>
-                            <li><a href="#"><i class="fa fa-angle-right"></i> Sedan</a></li>
-                            <li><a href="#"><i class="fa fa-angle-right"></i> SUV</a></li>
-                            <li><a href="#"><i class="fa fa-angle-right"></i> Crossover</a></li>
-                        </ul>
+                    <div class="col-lg-2 col-md-3">
+                        <div class="footer__widget">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-angle-right"></i>구매 및 지원</a></li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-3 col-md-6">
                     <div class="footer__brand">
-                        <h5>Top Brand</h5>
                         <ul>
-                            <li><a href="#"><i class="fa fa-angle-right"></i> Abarth</a></li>
-                            <li><a href="#"><i class="fa fa-angle-right"></i> Acura</a></li>
-                            <li><a href="#"><i class="fa fa-angle-right"></i> Alfa Romeo</a></li>
-                            <li><a href="#"><i class="fa fa-angle-right"></i> Audi</a></li>
+                            <li><a href="{% url 'question_list' %}"><i class="fa fa-angle-right"></i> 게시판</a></li>
                         </ul>
                         <ul>
-                            <li><a href="#"><i class="fa fa-angle-right"></i> BMW</a></li>
-                            <li><a href="#"><i class="fa fa-angle-right"></i> Chevrolet</a></li>
-                            <li><a href="#"><i class="fa fa-angle-right"></i> Ferrari</a></li>
-                            <li><a href="#"><i class="fa fa-angle-right"></i> Honda</a></li>
+                            <li><a href="contact"><i class="fa fa-angle-right"></i>로그인</a></li>
                         </ul>
                     </div>
+                </div>
+
+                <div class="footer__social">
+                    <a href="https://www.youtube.com/results?search_query=%EC%A0%84%EA%B8%B0%EC%B0%A8" class="facebook"><i class="fa fa-youtube-play"></i></a>
+                    <a href="https://github.com/bongsuyeon/Project_Electric-Vehicle" class="twitter"><i class="fa fa-github"></i></a>
+                    <a href="https://www.google.com/search?safe=strict&hl=ko&sxsrf=ALeKk02fcjZOzs1ygjVQcDQKtX4wKanO0g%3A1613440586986&source=hp&ei=SiYrYMvDOdiDoATLh6CAAg&iflsig=AINFCbYAAAAAYCs0WuOAP2uaVCh25qmHNfhW6Kic2pLM&q=%EC%A0%84%EA%B8%B0%EC%B0%A8&oq=%EC%A0%84%EA%B8%B0%EC%B0%A8&gs_lcp=Cgdnd3Mtd2l6EAMyBAgjECcyBAgjECcyCAgAELEDEIMBMggIABCxAxCDATINCAAQhwIQsQMQgwEQFDIICAAQsQMQgwEyCAgAELEDEIMBMggIABCxAxCDATIICAAQsQMQgwEyCAgAELEDEIMBOg0IIxDNAxDqAhAnEIsDOgoIIxDqAhAnEIsDOgIIADoFCAAQsQM6BwgAEIcCEBRQtBVYmCBg3yFoAnAAeAGAAaQBiAGpB5IBAzAuN5gBAKABAaoBB2d3cy13aXqwAQq4AQI&sclient=gws-wiz&ved=0ahUKEwjLkLTIpu3uAhXYAYgKHcsDCCAQ4dUDCAc&uact=5" class="google"><i class="fa fa-google"></i></a>
+                    <a href="https://www.google.co.kr/chrome/?brand=JJTC&gclid=Cj0KCQiA1KiBBhCcARIsAPWqoSqAXvtBiUxMxP79vieCyAc4s_SEDG1Vm-IUOHPlViJmpfIZa5BXjTUaAoiLEALw_wcB&gclsrc=aw.ds" class="skype"><i class="fa fa-chrome"></i></a>
+                </div>
+
                 </div>
             </div>
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
@@ -324,7 +310,7 @@
             </div>
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
         </div>
-    </footer>
+</footer>
     <!-- Footer Section End -->
 
     <!-- Search Begin -->
@@ -352,10 +338,10 @@
     <script>
 $( document ).ready(function(){
 
-   //테스트용 데이터
-   var sel1 = {
-       " ":"지역",
-       "Seoul":"서울",
+	//테스트용 데이터
+	var sel1 = {
+    	" ":"지역",
+    	"Seoul":"서울",
         "Busan":"부산",
         "Daegu":"대구",
         "Incheon":"인천",
@@ -377,9 +363,9 @@ $( document ).ready(function(){
 
     //sel1이 여성일경우
     var sel2_1 = {
-       " ":"브랜드 선택",
-       "HYUNDAI": "현대",
-       "KIA": "기아",
+    	" ":"브랜드 선택",
+    	"HYUNDAI": "현대",
+    	"KIA": "기아",
         "SAMSUNG": "르노삼성",
         "BMW": "BMW",
         "GM": "GM",
@@ -393,9 +379,9 @@ $( document ).ready(function(){
 
     //sel1이 남성일경우
     var sel2_2 = {
-       " ":"브랜드 선택",
-       "HYUNDAI": "현대",
-       "KIA": "기아",
+    	" ":"브랜드 선택",
+    	"HYUNDAI": "현대",
+    	"KIA": "기아",
         "SAMSUNG": "르노삼성",
         "BMW": "BMW",
         "GM": "GM",
@@ -408,9 +394,9 @@ $( document ).ready(function(){
     };
 
     var sel2_3 = {
-       " ":"브랜드 선택",
-       "HYUNDAI": "현대",
-       "KIA": "기아",
+    	" ":"브랜드 선택",
+    	"HYUNDAI": "현대",
+    	"KIA": "기아",
         "SAMSUNG": "르노삼성",
         "BMW": "BMW",
         "GM": "GM",
@@ -423,9 +409,9 @@ $( document ).ready(function(){
     };
 
     var sel2_4 = {
-       " ":"브랜드 선택",
-       "HYUNDAI": "현대",
-       "KIA": "기아",
+    	" ":"브랜드 선택",
+    	"HYUNDAI": "현대",
+    	"KIA": "기아",
         "SAMSUNG": "르노삼성",
         "BMW": "BMW",
         "GM": "GM",
@@ -438,9 +424,9 @@ $( document ).ready(function(){
     };
 
     var sel2_5 = {
-       " ":"브랜드 선택",
-       "HYUNDAI": "현대",
-       "KIA": "기아",
+    	" ":"브랜드 선택",
+    	"HYUNDAI": "현대",
+    	"KIA": "기아",
         "SAMSUNG": "르노삼성",
         "BMW": "BMW",
         "GM": "GM",
@@ -453,9 +439,9 @@ $( document ).ready(function(){
     };
 
     var sel2_6 = {
-       " ":"브랜드 선택",
-       "HYUNDAI": "현대",
-       "KIA": "기아",
+    	" ":"브랜드 선택",
+    	"HYUNDAI": "현대",
+    	"KIA": "기아",
         "SAMSUNG": "르노삼성",
         "BMW": "BMW",
         "GM": "GM",
@@ -468,9 +454,9 @@ $( document ).ready(function(){
     };
 
     var sel2_7 = {
-       " ":"브랜드 선택",
-       "HYUNDAI": "현대",
-       "KIA": "기아",
+    	" ":"브랜드 선택",
+    	"HYUNDAI": "현대",
+    	"KIA": "기아",
         "SAMSUNG": "르노삼성",
         "BMW": "BMW",
         "GM": "GM",
@@ -483,9 +469,9 @@ $( document ).ready(function(){
     };
 
     var sel2_8 = {
-       " ":"브랜드 선택",
-       "HYUNDAI": "현대",
-       "KIA": "기아",
+    	" ":"브랜드 선택",
+    	"HYUNDAI": "현대",
+    	"KIA": "기아",
         "SAMSUNG": "르노삼성",
         "BMW": "BMW",
         "GM": "GM",
@@ -498,9 +484,9 @@ $( document ).ready(function(){
     };
 
     var sel2_9 = {
-       " ":"브랜드 선택",
-       "HYUNDAI": "현대",
-       "KIA": "기아",
+    	" ":"브랜드 선택",
+    	"HYUNDAI": "현대",
+    	"KIA": "기아",
         "SAMSUNG": "르노삼성",
         "BMW": "BMW",
         "GM": "GM",
@@ -513,9 +499,9 @@ $( document ).ready(function(){
     };
 
     var sel2_10 = {
-       " ":"브랜드 선택",
-       "HYUNDAI": "현대",
-       "KIA": "기아",
+    	" ":"브랜드 선택",
+    	"HYUNDAI": "현대",
+    	"KIA": "기아",
         "SAMSUNG": "르노삼성",
         "BMW": "BMW",
         "GM": "GM",
@@ -528,9 +514,9 @@ $( document ).ready(function(){
     };
 
     var sel2_11 = {
-       " ":"브랜드 선택",
-       "HYUNDAI": "현대",
-       "KIA": "기아",
+    	" ":"브랜드 선택",
+    	"HYUNDAI": "현대",
+    	"KIA": "기아",
         "SAMSUNG": "르노삼성",
         "BMW": "BMW",
         "GM": "GM",
@@ -543,9 +529,9 @@ $( document ).ready(function(){
     };
 
     var sel2_12 = {
-       " ":"브랜드 선택",
-       "HYUNDAI": "현대",
-       "KIA": "기아",
+    	" ":"브랜드 선택",
+    	"HYUNDAI": "현대",
+    	"KIA": "기아",
         "SAMSUNG": "르노삼성",
         "BMW": "BMW",
         "GM": "GM",
@@ -558,9 +544,9 @@ $( document ).ready(function(){
     };
 
     var sel2_13 = {
-       " ":"브랜드 선택",
-       "HYUNDAI": "현대",
-       "KIA": "기아",
+    	" ":"브랜드 선택",
+    	"HYUNDAI": "현대",
+    	"KIA": "기아",
         "SAMSUNG": "르노삼성",
         "BMW": "BMW",
         "GM": "GM",
@@ -573,9 +559,9 @@ $( document ).ready(function(){
     };
 
     var sel2_14 = {
-       " ":"브랜드 선택",
-       "HYUNDAI": "현대",
-       "KIA": "기아",
+    	" ":"브랜드 선택",
+    	"HYUNDAI": "현대",
+    	"KIA": "기아",
         "SAMSUNG": "르노삼성",
         "BMW": "BMW",
         "GM": "GM",
@@ -588,9 +574,9 @@ $( document ).ready(function(){
     };
 
     var sel2_15 = {
-       " ":"브랜드 선택",
-       "HYUNDAI": "현대",
-       "KIA": "기아",
+    	" ":"브랜드 선택",
+    	"HYUNDAI": "현대",
+    	"KIA": "기아",
         "SAMSUNG": "르노삼성",
         "BMW": "BMW",
         "GM": "GM",
@@ -603,9 +589,9 @@ $( document ).ready(function(){
     };
 
     var sel2_16 = {
-       " ":"브랜드 선택",
-       "HYUNDAI": "현대",
-       "KIA": "기아",
+    	" ":"브랜드 선택",
+    	"HYUNDAI": "현대",
+    	"KIA": "기아",
         "SAMSUNG": "르노삼성",
         "BMW": "BMW",
         "GM": "GM",
@@ -618,9 +604,9 @@ $( document ).ready(function(){
     };
 
     var sel2_17 = {
-       " ":"브랜드 선택",
-       "HYUNDAI": "현대",
-       "KIA": "기아",
+    	" ":"브랜드 선택",
+    	"HYUNDAI": "현대",
+    	"KIA": "기아",
         "SAMSUNG": "르노삼성",
         "BMW": "BMW",
         "GM": "GM",
@@ -633,74 +619,74 @@ $( document ).ready(function(){
     };
 
     var sel3_1 = {
-       " ":"차종",
-       "C": "코나(기본형)",
-        "D": "코나(경제형)",
-        "E": "아이오닉(HP)",
-        "F": "아이오닉(PTC)"
+    	" ":"차종",
+    	"A": "코나(기본형)",
+        "B": "코나(경제형)",
+        "C": "아이오닉(HP)",
+        "D": "아이오닉(PTC)"
     };
     var sel3_2 = {
-       " ":"차종",
-       "C": "니로(HP)",
-        "D": "니로(PTC)",
-        "E": "니로 EV",
-        "F": "쏘울(기본형)",
-        "G": "쏘울(도심형)"
+    	" ":"차종",
+    	"E": "니로(HP)",
+        "F": "니로(PTC)",
+        "G": "니로 EV",
+        "H": "쏘울(기본형)",
+        "I": "쏘울(도심형)"
     };
 
     var sel3_3 = {
-       " ":"차종",
-       "C": "ZOE ZEN",
-        "D": "ZOE INTENS ECO",
-        "E": "ZOE INTENS"
+    	" ":"차종",
+    	"J": "ZOE ZEN",
+        "K": "ZOE INTENS ECO",
+        "L": "ZOE INTENS"
     };
 
     var sel3_4 = {
-       " ":"차종",
-       "C": "i3 120Ah Lux",
-        "D": "i3 120Ah SoL+"
+    	" ":"차종",
+    	"M": "i3 120Ah Lux",
+        "N": "i3 120Ah SoL+"
     };
 
     var sel3_5 = {
-       " ":"차종",
-       "C": "볼트 EV LT",
-        "D": "볼트 EV Primier"
+    	" ":"차종",
+    	"O": "볼트 EV LT",
+        "P": "볼트 EV Primier"
     };
 
     var sel3_6 = {
-       " ":"차종",
-       "C": "Peugeot e-208",
-        "D": "DS3 E-tense",
-        "E": "Peugeot e-2008"
+    	" ":"차종",
+    	"Q": "Peugeot e-208",
+        "R": "DS3 E-tense",
+        "S": "Peugeot e-2008"
     };
 
     var sel3_7 = {
-       " ":"차종",
-       "C": "Model S",
-        "D": "Model 3 (SRP RWD)",
-        "E": "Model 3 (Long Range)",
-        "F": "Model 3 (Performance)"
+    	" ":"차종",
+    	"T": "Model S",
+        "U": "Model 3 (SRP RWD)",
+        "V": "Model 3 (Long Range)",
+        "W": "Model 3 (Performance)"
     };
 
     var sel3_8 = {
-       " ":"차종",
-       "C": "I-PACE EV400"
+    	" ":"차종",
+    	"X": "I-PACE EV400"
     };
 
     var sel3_9 = {
-       " ":"차종",
-       "C": "EQC 400 4M",
-        "D": "EQC 400 4MATIC"
+    	" ":"차종",
+    	"Y": "EQC 400 4M",
+        "Z": "EQC 400 4MATIC"
     };
 
     var sel3_10 = {
-       " ":"차종",
-       "C": "e-tron 55 quattro"
+    	" ":"차종",
+    	"AA": "e-tron 55 quattro"
     };
 
     var sel3_11 = {
-       " ":"차종",
-       "C": "SMART EV Z"
+    	" ":"차종",
+    	"BB": "SMART EV Z"
     };
 
 
@@ -709,123 +695,124 @@ $( document ).ready(function(){
    // map배열과 select 태그 id를 넘겨주면 option 태그를 붙여줌.
    // map[키이름] = 그 키에 해당하는 value를 반환한다.
    //retOption(데이터맵, select함수 id)
+
+
+
    function retOption(mapArr, select){
-       var html = '';
-       var keys = Object.keys(mapArr);
-       for (var i in keys) {
-           html += "<option value=" + "'" + keys[i] + "'>" + mapArr[keys[i]] + "</option>";
-       }
+    	var html = '';
+    	var keys = Object.keys(mapArr);
+    	for (var i in keys) {
+    	    html += "<option value=" + "'" + keys[i] + "'>" + mapArr[keys[i]] + "</option>";
+    	}
 
         $("select[id='" + select +"']").html(html);
    }
 
    $("select[id='sel1']").on("change", function(){
-       var option = $("#sel1 option:selected").val();
+    	var option = $("#sel1 option:selected").val();
         var subSelName = '';
-       if(option == "Seoul") {
-           subSelName = "sel2_1";
+    	if(option == "Seoul") {
+        	subSelName = "sel2_1";
 
         } else if(option == "Busan"){
-           subSelName = "sel2_2";
+        	subSelName = "sel2_2";
 
         } else if(option == "Daegu"){
-           subSelName = "sel2_3";
+        	subSelName = "sel2_3";
 
         } else if(option == "Incheon"){
-           subSelName = "sel2_4";
+        	subSelName = "sel2_4";
 
         } else if(option == "Gwangju"){
-           subSelName = "sel2_5";
+        	subSelName = "sel2_5";
 
         } else if(option == "Daejeon"){
-           subSelName = "sel2_6";
+        	subSelName = "sel2_6";
 
         } else if(option == "Ulsan"){
-           subSelName = "sel2_7";
+        	subSelName = "sel2_7";
 
         } else if(option == "Sejong"){
-           subSelName = "sel2_8";
+        	subSelName = "sel2_8";
 
         } else if(option == "Gyeonggi"){
-           subSelName = "sel2_9";
+        	subSelName = "sel2_9";
 
         } else if(option == "Kangwon"){
-           subSelName = "sel2_10";
+        	subSelName = "sel2_10";
 
         } else if(option == "Chungbuk"){
-           subSelName = "sel2_11";
+        	subSelName = "sel2_11";
 
         } else if(option == "Chungnam"){
-           subSelName = "sel2_12";
+        	subSelName = "sel2_12";
 
         } else if(option == "Jeonbuk"){
-           subSelName = "sel2_13";
+        	subSelName = "sel2_13";
 
         } else if(option == "Jeonnam"){
-           subSelName = "sel2_14";
+        	subSelName = "sel2_14";
 
         } else if(option == "Gyeongbuk"){
-           subSelName = "sel2_15";
+        	subSelName = "sel2_15";
 
         } else if(option == "Gyeongnam"){
-           subSelName = "sel2_16";
+        	subSelName = "sel2_16";
 
         } else if(option == "Jeju"){
-           subSelName = "sel2_17";
+        	subSelName = "sel2_17";
 
         } else{
-           $("#sel2").hide();
-           return;
+        	$("#sel2").hide();
+        	return;
         }
         $("#sel2").show();
         retOption(eval(subSelName), "sel2");
     })
 
    $("select[id='sel2']").on("change", function(){
-       var option = $("#sel2 option:selected").val();
+    	var option = $("#sel2 option:selected").val();
         var subSelName = '';
-       if(option == "HYUNDAI") {
-           subSelName = "sel3_1";
+    	if(option == "HYUNDAI") {
+        	subSelName = "sel3_1";
 
         } else if(option == "KIA"){
-           subSelName = "sel3_2";
+        	subSelName = "sel3_2";
 
         } else if(option == "SAMSUNG"){
-           subSelName = "sel3_3";
+        	subSelName = "sel3_3";
 
         } else if(option == "BMW"){
-           subSelName = "sel3_4";
+        	subSelName = "sel3_4";
 
         } else if(option == "GM"){
-           subSelName = "sel3_5";
+        	subSelName = "sel3_5";
 
         } else if(option == "HANBUL"){
-           subSelName = "sel3_6";
+        	subSelName = "sel3_6";
 
         } else if(option == "TESLA"){
-           subSelName = "sel3_7";
+        	subSelName = "sel3_7";
 
         } else if(option == "JAGUAR"){
-           subSelName = "sel3_8";
+        	subSelName = "sel3_8";
 
         } else if(option == "BENZ"){
-           subSelName = "sel3_9";
+        	subSelName = "sel3_9";
 
         } else if(option == "AUDI"){
-           subSelName = "sel3_10";
+        	subSelName = "sel3_10";
 
         } else if(option == "SEMISISCO"){
-           subSelName = "sel3_11";
+        	subSelName = "sel3_11";
 
         } else{
-           $("#sel3").hide();
-           return;
+        	$("#sel3").hide();
+        	return;
         }
         $("#sel3").show();
         retOption(eval(subSelName), "sel3");
     })
-
-
 
    retOption(sel1, "sel1");
    retOption(sel2, "sel2");
